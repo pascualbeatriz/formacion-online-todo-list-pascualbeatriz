@@ -10,3 +10,17 @@ body {
 .tachado-tarea {
   text-decoration: line-through;
 }
+
+.page {
+  border: indigo;
+}
+
+.modal {
+  background-color: blue;
+  height: 300px;
+  color: black;
+
+  // position: absolute;
+  // bottom: 0;
+  // z-index: 2;
+}

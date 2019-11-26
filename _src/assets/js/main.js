@@ -3,6 +3,7 @@
 console.log(">> Ready :)");
 
 const dateContent = document.querySelector(".title__days");
+const divPage = document.querySelector(".page");
 
 let arrTasks = [];
 
@@ -31,9 +32,50 @@ dateContent.innerHTML =
 
 let button = document.getElementById("btn-add");
 
+// esto es el modal que aparece cada vez que le doy al boton + = cada DIV
+let modal = document.createElement("div");
+modal.className = "modal";
+
+// esto es el input que va dentro del modal =  dentro DIV
+let inputModal = document.createElement("input");
+inputModal.type = "text";
+inputModal.value = "";
+inputModal.name = "Add task";
+inputModal.className = "modal__input";
+
+// esto es el p que va dentro del modal TEXTO =  dentro DIV
+let textModal = document.createElement("p");
+let modalContent = document.createTextNode("Nueva Tarea");
+modalContent.className = "modal__text";
+
+textModal.appendChild(modalContent);
+
+// esto es el botton de añadir que va dentro del modal =  dentro DIV
+let btnModal = document.createElement("button");
+btnModal.type = "button";
+btnModal.value = "Añadir tarea";
+btnModal.className = "modal__button";
+("Añadir tarea");
+
+textModal.appendChild(modalContent);
+
+// añado el contenido boton, el texto y input al modal
+modal.appendChild(textModal);
+modal.appendChild(inputModal);
+modal.appendChild(btnModal);
+
+console.log(modal);
+
+const modalElement = document.querySelector(".modal");
+function addModal() {
+  divPage.appendChild(modal);
+  // divPage.innerHTML = modalElement;
+}
+
 function addTask() {
   let taskList = document.getElementById("ul-list");
 
+  // esto es cada tarea = cada LI
   let task = document.createElement("li");
   task.className = "li__task";
 
@@ -55,6 +97,7 @@ function addTask() {
   //   task,
   //   checked: false
   // });
+  modal.remove();
 }
 
 function getinputCheck(event) {
@@ -69,5 +112,5 @@ function getinputCheck(event) {
     }
   });
 }
-
-button.addEventListener("click", addTask);
+button.addEventListener("click", addModal);
+btnModal.addEventListener("click", addTask);
