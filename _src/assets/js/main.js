@@ -64,12 +64,11 @@ modal.appendChild(textModal);
 modal.appendChild(inputModal);
 modal.appendChild(btnModal);
 
-console.log(modal);
+// console.log(modal);
 
-const modalElement = document.querySelector(".modal");
+// const modalElement = document.querySelector(".modal");
 function addModal() {
   divPage.appendChild(modal);
-  // divPage.innerHTML = modalElement;
 }
 
 function addTask() {
@@ -87,9 +86,12 @@ function addTask() {
   checkbox.className = "input__task";
 
   task.appendChild(checkbox);
-  let text = "Task: ";
-  task.appendChild(document.createTextNode(text));
+  task.appendChild(document.createTextNode(inputModal.value));
   taskList.appendChild(task);
+
+  //  inputModal.addEventListener("keyup", function() {
+  //   console.log(inputModal.value);
+  // });
 
   checkbox.addEventListener("click", getinputCheck);
 
@@ -112,5 +114,7 @@ function getinputCheck(event) {
     }
   });
 }
+
 button.addEventListener("click", addModal);
+// inputModal.addEventListener("keyup", addTask);
 btnModal.addEventListener("click", addTask);
