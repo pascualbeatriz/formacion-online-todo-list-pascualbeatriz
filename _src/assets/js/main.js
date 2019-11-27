@@ -55,7 +55,6 @@ let btnModal = document.createElement("button");
 btnModal.type = "button";
 btnModal.value = "Añadir tarea";
 btnModal.className = "modal__button";
-("Añadir tarea");
 
 textModal.appendChild(modalContent);
 
@@ -66,45 +65,54 @@ modal.appendChild(btnModal);
 
 // console.log(modal);
 
+// if (localStorage.getItem("info") !== null) {
+//   const ls = localStorage.getItem("info");
+
+// }
+
 // const modalElement = document.querySelector(".modal");
 function addModal() {
   divPage.appendChild(modal);
 }
 
 function addTask() {
+  arrTasks.push({
+    name: inputModal.value,
+    checked: false
+  });
+  console.log(arrTasks);
+  renderTask();
+}
+
+function renderTask() {
   let taskList = document.getElementById("ul-list");
-
+  taskList.innerHTML = "";
   // esto es cada tarea = cada LI
-  let task = document.createElement("li");
-  task.className = "li__task";
+  arrTasks.forEach(currentTask => {
+    let task = document.createElement("li");
+    task.className = "li__task";
+    task.setAttribute("id", "li_input");
 
-  let checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  checkbox.value = "value";
-  checkbox.name = "name";
-  checkbox.id = "id";
-  checkbox.className = "input__task";
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = currentTask.checked ? "checked" : "";
+    checkbox.name = "name";
+    checkbox.setAttribute("id", "input");
+    checkbox.className = "input__task";
 
-  task.appendChild(checkbox);
-  task.appendChild(document.createTextNode(inputModal.value));
-  taskList.appendChild(task);
+    task.appendChild(checkbox);
+    task.appendChild(document.createTextNode(currentTask.name));
+    taskList.appendChild(task);
+    checkbox.addEventListener("click", getinputCheck);
+  });
 
-  //  inputModal.addEventListener("keyup", function() {
-  //   console.log(inputModal.value);
-  // });
-
-  checkbox.addEventListener("click", getinputCheck);
-
-  // arrTasks.push({
-  //   task,
-  //   checked: false
-  // });
+  // let archivo = document.getElementById("li_input").innerHTML;
+  // localStorage.setItem("info", archivo);
   modal.remove();
 }
 
 function getinputCheck(event) {
   let checkboxes = document.querySelectorAll(".input__task");
-  // let task = document.querySelector(".li__task");
 
   checkboxes.forEach((thisCheckBox, index) => {
     if (thisCheckBox.checked === true) {
